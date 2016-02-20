@@ -1,0 +1,6 @@
+<ion-view view-title="My Plan">
+  <button class="button button-positive col col-33 col-offset-33" ng-click="editing = !editing">
+    <!-- TODO: probably change this from a toggle to an editing modal -->
+    <i ng-class="['icon', {'ion-edit': !editing, 'ion-checkmark': editing}]"></i> {{editing ? "Save Plan" : "Edit Plan"}}
+  </button>
+</ion-view>
