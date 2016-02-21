@@ -36,4 +36,10 @@ $ ionic serve
 * add notifications for planlove
 * allow styling
 * add silly easter eggs/references
-* add more functionality to the Plans JSON api/enable CORS
+
+## Plans API Changes
+* enable CORS
+* add search
+* add notes
+* add polls
+* add planlove
