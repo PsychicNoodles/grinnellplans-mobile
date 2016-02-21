@@ -32,28 +32,42 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
 
   $scope.logout = PlansFactory.logout;
 
-  $scope.menuItems = [
-    { href: 'plan/my', text: 'My Plan' },
-    { href: 'autofingerlist', text: 'Auto-Finger List' },
-    { href: 'plan/read', text: 'Read a List' }
-  ];
-
   $scope.selected = function(href) {
     return $location.path() == ('/app/' + href);
   }
 })
 
 // Controller for all plan content.
-.controller('PlanCtrl', function($scope) {
+.controller('PlanCtrl', function($scope, $stateParams, PlansFactory) {
+  $scope.username = null;
+  $scope.loginName = PlansFactory.username;
 })
 
 // Controller for the My Plan view.
-.controller('MyPlanCtrl', function($scope) {
-  $scope.editing = false;
+.controller('MyPlanCtrl', function($scope, $ionicModal) {
+  $scope.testChanges = null;
+
+  $scope.edit = function() {
+    $ionicModal.fromTemplateUrl('templates/editplan.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+      modal.show();
+    });
+  }
+
+  $scope.discard = function() {
+    $scope.modal.remove();
+  }
+  $scope.username = 'tester'
 })
 
 // Controller for other plan views.
-.controller('ReadPlanCtrl', function($scope) {
+.controller('ReadPlanCtrl', function($scope, $stateParams) {
+  $scope.username = $stateParams.username
+})
+
+.controller('SearchCtrl', function($scope) {
 
 })
 

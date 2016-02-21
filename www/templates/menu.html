@@ -18,9 +18,15 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item ng-repeat="item in menuItems" menu-close ng-href="#/app/{{item.href}}" ng-class="{'selected activated': selected(item.href)}">
-          {{item.text}}
+        <ion-item menu-close ui-sref="app.plan.self" ng-class="{'selected activated': selected(item.href)}">
+          My Plan
         </ion-item>
+        <ion-item menu-close ui-sref="app.search" ng-class="{'selected activated': selected(item.href)}">
+          Search Plans
+        </ion-item>
+        <!-- <ion-item ng-repeat="item in menuItems" menu-close ng-href="#/app/{{item.href}}" ng-class="{'selected activated': selected(item.href)}">
+          {{item.text}}
+        </ion-item> -->
         <ion-item class="item-divider">
           Settings
         </ion-item>
