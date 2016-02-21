@@ -6,6 +6,7 @@ angular.module('grinnellplans-mobile.factories', [])
 }])
 .factory('PlansFactory', ['apiUrl', '$http', '$log', '$timeout', function(apiUrl, $http, $log, $timeout) {
   loggedIn = false;
+  username = null;
   return {
     login: function(username, password) {
       return $http.post(apiUrl, { username: username, password: password }, {
@@ -30,6 +31,7 @@ angular.module('grinnellplans-mobile.factories', [])
     read: function(username) {
 
     },
-    loggedIn: function() { return loggedIn; }
+    loggedIn: function() { return loggedIn; },
+    username: function() { return username; }
   }
 }]);
