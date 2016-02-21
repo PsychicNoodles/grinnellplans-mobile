@@ -39,7 +39,8 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
 
 // Controller for all plan content.
 .controller('PlanCtrl', function($scope, $stateParams, PlansFactory) {
-  $scope.username = null;
+  $scope.shared = {}
+  $scope.shared.username = 'not set'
   $scope.loginName = PlansFactory.username;
 })
 
@@ -59,12 +60,19 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
   $scope.discard = function() {
     $scope.modal.remove();
   }
-  $scope.username = 'tester'
+
+  // Needed to update every time the view is entered, not just on init.
+  $scope.$on('$ionicView.enter', function() {
+    $scope.shared.username = 'tester';
+  })
 })
 
 // Controller for other plan views.
 .controller('ReadPlanCtrl', function($scope, $stateParams) {
-  $scope.username = $stateParams.username
+  // Needed to update every time the view is entered, not just on init.
+  $scope.$on('$ionicView.enter', function() {
+    $scope.shared.username = $stateParams.username;
+  })
 })
 
 .controller('SearchCtrl', function($scope) {
