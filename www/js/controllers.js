@@ -38,10 +38,41 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
 })
 
 // Controller for all plan content.
-.controller('PlanCtrl', function($scope, $stateParams, PlansFactory) {
+.controller('PlanCtrl', function($scope, $stateParams, $ionicPopup, PlansFactory, $http, $sanitize) {
   $scope.shared = {}
-  $scope.shared.username = 'not set'
   $scope.loginName = PlansFactory.username;
+  $scope.planData = {};
+
+  $scope.update = function() {
+    $http.post('https://www.grinnellplans.com/api/1/?task=read', {
+      data: { username: $scope.shared.username }
+    }).then(function(res) {
+      if(res.data.success) {
+        console.log(res.data.plandata)
+        $scope.planData = res.data.plandata;
+      } else {
+        $ionicPopup.alert({
+          title: 'Read plan error',
+          template: 'Message: ' + res.data.message
+        });
+      }
+    }, function(err) {
+      $ionicPopup.alert({
+        title: 'Read plan error',
+        template: 'Error: ' + err
+      })
+    });
+  };
+
+  $scope.parseBody = function(body) {
+    // Change links to use internal search
+    if(typeof body !== 'undefined')
+      return body.replace(/(<a\b[^>]*href=")read.php\?searchname=([^"]*)"/g, '$1#/app/search/$2"');
+  };
+
+  $scope.$watch('$scope.shared.username', function() {
+    $scope.update();
+  });
 })
 
 // Controller for the My Plan view.
@@ -75,8 +106,8 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
   })
 })
 
-.controller('SearchCtrl', function($scope) {
-
+.controller('SearchCtrl', function($scope, $stateParams) {
+  $scope.param = $stateParams.str;
 })
 
 // Controller for the auto finger list.

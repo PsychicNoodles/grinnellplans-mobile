@@ -1,6 +1,16 @@
 <ion-view>
   <ion-content>
-    <h1>Plan Content for {{shared.username}}</h1>
+    <div class="list list-inset">
+      <div class="item">
+        <b>Last Login:</b> {{planData.last_login}}
+      </div>
+      <div class="item">
+        <b>Last Updated:</b> {{planData.last_updated}}
+      </div>
+      <div class="item item-text-wrap" ng-bind-html="parseBody(planData.plan)" id="plan-body">
+        <!-- {{parseBody(planData.plan)}} -->
+      </div>
+    </div>
     <ion-nav-view name="navContent"></ion-nav-view>
   </ion-content>
 </ion-view>

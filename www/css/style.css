@@ -1,3 +1,8 @@
 .selected {
   font-weight: bold;
 }
+
+#plan-body p {
+  font-size: 16px;
+  color: #444;
+}
