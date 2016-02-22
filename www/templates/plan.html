@@ -7,10 +7,8 @@
       <div class="item">
         <b>Last Updated:</b> {{planData.last_updated}}
       </div>
-      <div class="item item-text-wrap" ng-bind-html="parseBody(planData.plan)" id="plan-body">
-        <!-- {{parseBody(planData.plan)}} -->
-      </div>
+      <div class="item item-text-wrap" ng-bind-html="parseBody(planData.plan)" id="plan-body"></div>
     </div>
-    <ion-nav-view name="navContent"></ion-nav-view>
+    <ion-nav-view name="navContent" id="nav-content"></ion-nav-view>
   </ion-content>
 </ion-view>

@@ -6,3 +6,10 @@
   font-size: 16px;
   color: #444;
 }
+
+#nav-content {
+  /* This prevents a phantom view container from appearing under the plan content
+   * while also allowing the nav-bar to be set and controlled.
+   * There might be a better way to fix it, but for now this works. */
+  display: none;
+}
