@@ -78,7 +78,7 @@ angular.module('grinnellplans-mobile', ['ionic', 'grinnellplans-mobile.controlle
   })
 
   .state('app.search', {
-    url: '/search/:str',
+    url: '/search/:searchname',
     views: {
       'menuContent': {
         templateUrl: 'templates/search.html',

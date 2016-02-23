@@ -38,9 +38,8 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
 })
 
 // Controller for all plan content.
-.controller('PlanCtrl', function($scope, $stateParams, $ionicPopup, PlansFactory, $http, $sanitize) {
+.controller('PlanCtrl', function($scope, $stateParams, $ionicPopup, $http) {
   $scope.shared = {}
-  $scope.loginName = PlansFactory.username;
   $scope.planData = {};
 
   $scope.update = function() {
@@ -107,7 +106,9 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
 })
 
 .controller('SearchCtrl', function($scope, $stateParams) {
-  $scope.param = $stateParams.str;
+  $scope.search = function() {
+    //$http.post to search endpoint using $scope.searchname
+  }
 })
 
 // Controller for the auto finger list.
