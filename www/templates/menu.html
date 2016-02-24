@@ -18,8 +18,11 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ui-sref="app.plan.self" ng-class="{'selected activated': selected(item.href)}">
+        <ion-item menu-close ng-if="loggedIn()" ui-sref="app.plan({username: username()})" ng-class="{'selected activated': selected(item.href)}">
           My Plan
+        </ion-item>
+        <ion-item menu-close ui-sref="app.plan.search" ng-class="{'selected activated': selected(item.href)}">
+          Read a Plan
         </ion-item>
         <ion-item menu-close ui-sref="app.search" ng-class="{'selected activated': selected(item.href)}">
           Search Plans

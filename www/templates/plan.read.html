@@ -1,0 +1,16 @@
+<ion-view view-title="Read Plan ({{username}})">
+  <ion-nav-buttons side="right">
+    <button class="button button icon ion-edit" ng-click="edit()"></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="list list-inset">
+      <div class="item">
+        <b>Last Login:</b> <span ng-cloak>{{planData.last_login}}</span>
+      </div>
+      <div class="item">
+        <b>Last Updated:</b> <span ng-cloak>{{planData.last_updated}}</span>
+      </div>
+      <div class="item item-text-wrap" ng-bind-html="parseBody(planData.plan)" id="plan-body"></div>
+    </div>
+  </ion-content>
+</ion-view>

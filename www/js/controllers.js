@@ -32,19 +32,20 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
 
   $scope.logout = PlansFactory.logout;
 
+  $scope.username = PlansFactory.username;
+
   $scope.selected = function(href) {
     return $location.path() == ('/app/' + href);
   }
 })
 
 // Controller for all plan content.
-.controller('PlanCtrl', function($scope, $stateParams, $ionicPopup, $http) {
-  $scope.shared = {}
+.controller('PlanReadCtrl', function($scope, $stateParams, $ionicPopup, $ionicModal, $http) {
   $scope.planData = {};
 
   $scope.update = function() {
     $http.post('https://www.grinnellplans.com/api/1/?task=read', {
-      data: { username: $scope.shared.username }
+      data: { username: $stateParams.username }
     }).then(function(res) {
       if(res.data.success) {
         console.log(res.data.plandata)
@@ -69,15 +70,6 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
       return body.replace(/(<a\b[^>]*href=")read.php\?searchname=([^"]*)"/g, '$1#/app/search/$2"');
   };
 
-  $scope.$watch('$scope.shared.username', function() {
-    $scope.update();
-  });
-})
-
-// Controller for the My Plan view.
-.controller('MyPlanCtrl', function($scope, $ionicModal) {
-  $scope.testChanges = null;
-
   $scope.edit = function() {
     $ionicModal.fromTemplateUrl('templates/editplan.html', {
       scope: $scope
@@ -91,18 +83,17 @@ angular.module('grinnellplans-mobile.controllers', ['grinnellplans-mobile.factor
     $scope.modal.remove();
   }
 
-  // Needed to update every time the view is entered, not just on init.
   $scope.$on('$ionicView.enter', function() {
-    $scope.shared.username = 'tester';
+    $scope.username = $stateParams.username;
+    $scope.update();
   })
 })
 
-// Controller for other plan views.
-.controller('ReadPlanCtrl', function($scope, $stateParams) {
-  // Needed to update every time the view is entered, not just on init.
-  $scope.$on('$ionicView.enter', function() {
-    $scope.shared.username = $stateParams.username;
-  })
+.controller('PlanSearchCtrl', function($scope, $state) {
+  $scope.search = function(searchname) {
+    // TODO: make a $http.post request to the search endpoint
+    $state.go('^.read', { username: searchname });
+  }
 })
 
 .controller('SearchCtrl', function($scope, $stateParams) {
